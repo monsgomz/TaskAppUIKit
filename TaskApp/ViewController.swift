@@ -17,8 +17,6 @@ class ViewController: UIViewController {
 		
 		super.viewDidLoad()
 		
-		//Get all the current saved tasks
-		
 		self.title = "Tasks"
 		tableView.delegate = self
 		tableView.dataSource = self
@@ -29,17 +27,35 @@ class ViewController: UIViewController {
 			UserDefaults().set(0, forKey: "count")
 		}
 		
-		
+		//Get all the current saved tasks
+		updateTasks()
 		
 	}
 
 	func updateTasks(){
+		
+		tasks.removeAll()
+		
+		guard	let count = UserDefaults().value(forKey: "count") as? Int else{
+			return
+		}
+		
+		for x in 0..<count {
+			
+			if let task = UserDefaults().value(forKey: "task_\(x+1)") as? String {
+				tasks.append(task)
+			}
+		}
+		
+		tableView.reloadData() //para que se muestre el valor
+		
 		
 	}
 	
 	/// Funcion para boton clic Add, agregar task
 	/// - Parameter sender:
 	@IBAction func didTapAdd(_ sender: Any) {
+		
 		let vc = storyboard?.instantiateViewController(identifier: "entry") as! EntryViewController //Se crea instancia de el otro view controller y se inicializa
 		vc.title = "New Task"
 		vc.update = {
