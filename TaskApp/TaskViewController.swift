@@ -9,12 +9,27 @@
 import UIKit
 
 class TaskViewController: UIViewController {
+	
+	@IBOutlet var label: UILabel!
+	
+	var task: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		
+		label.text = task
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "delete", style: .done, target: self, action: #selector(deletTask))
     }
+	
+	@objc func deletTask() {
+		
+//		let newCount = count - 1
+//		
+//		UserDefaults().setValue(newCount, forKey: "count")
+//		UserDefaults().setValue(nil, forKey: "task_\(currentPosition)")
+		
+	}
     
 
 

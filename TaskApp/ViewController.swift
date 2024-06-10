@@ -74,6 +74,12 @@ extension ViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { //para manejar los clic en la tabla
 		tableView.deselectRow(at: indexPath, animated: true)
+		
+		let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskViewController //Se crea instancia de el otro view controller y se inicializa
+		vc.title = "New Task"
+		vc.task = tasks[indexPath.row]
+		navigationController?.pushViewController(vc, animated: true) //pone el view controller en la pila de navegacion
+		
 	}
 }
 
